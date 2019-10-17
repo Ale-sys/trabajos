@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		body{
+
+			width: 960px;
+			margin: 0 auto;
+		}
+		h1
+		{
+			text-align: center;
+		}
+
+
+
+
+	</style>
+</head>
+<body>
+	<h1>jego del ahorcado</h1>
+	<canvas id="pantalla" width="960px" height="450px">
+	tu navegador no soporta canvas
+	</canvas>
+	<button id="button" type="reset" onclick="javascript:window.location.reload()">Volver a jugar</button>
+    <script type="text/javascript">
+    	var ctx;
+    	var canvas;
+    	var palabra;
+    	var letra = "ABCDEFGHIJKLMÑOPQRSTUVWXYZ"
+    	var colortecla= "blue"
+    	var colormargen="red"
+    	var inicioX= 200;
+    	var inicioY=300;
+    	var lon =35;
+    	var margen= 20;
+    	var teclas_Array= new array();
+    	var palabras_Array= new array();
+    	var letras_Array= new array();
+    	var aciertos =0;
+    	var errores=0;
+
+
+    	palabras_Array.push("perro");
+    	palabras_Array.push("gato");
+    	palabras_Array.push("leon");
+    	palabras_Array.push("vaca");
+    	palabras_Array.push("gallina");
+    	palabras_Array.push("flores");
+    	palabras_Array.push("casa");
+    	palabras_Array.push("ventana");
+    	palabras_Array.push("mama");
+    	palabras_Array.push("delfin");
+    	palabras_Array.push("televicion");
+    	palabras_Array.push("baño");
+    	palabras_Array.push("laptop");
+    	palabras_Array.push("celular");
+    	palabras_Array.push("tablet");
+    	palabras_Array.push("mesa");
+    	palabras_Array.push("novia");
+    	palabras_Array.push("novio");
+    	palabras_Array.push("sobrinos");
+    	palabras_Array.push("suegra");
+    	palabras_Array.push("araña");
+    	palabras_Array.push("aguila");
+    	palabras_Array.push("asotea");
+    	palabras_Array.push("tinaco");
+    	palabras_Array.push("bonita");
+    	palabras_Array.push("princesa");
+    	palabras_Array.push("fea");
+    	palabras_Array.push("tiburon");
+    	palabras_Array.push("pulpo");
+    	palabras_Array.push("cangrejo");
+
+    	function tecla(x,y,ancho,alto,letra)
+    	{
+    		this.x=x;
+    		this.y=y;
+    		this.letra=letra;
+    		this.ancho=ancho;
+    		this.dibuja=dibujaTecla;
+    	}
+    	function tecla(x,y,ancho,alto,letra)
+    	{
+    		this.x=x;
+    		this.y=y;
+    		this.letra=letra;
+    		this.ancho=ancho;
+    		this.dibuja=dibujaCajaLetra;
+    		this.dibujaLetra=dibujaLetra;
+    	}
+    	function teclado()
+    	{
+    		var ren=0;
+    		var col=0;
+    		var letra "";
+    		var x inicioX;
+    		var y inicioY;
+    		var MiLetra;
+
+    		for(var i=0; i < letras.length; i++);
+    		{
+    			letra= letras.subtr(i,1);
+    			MiLetra=new tecla(x,y,lon,lon,letra);
+    			MiLetra.dibuja();
+    			teclas_Array.push(MiLetra);
+    			x+=lon + margen;
+    			col++;
+    			if (col==10)
+    			{
+    				col=0;
+    				ren++;
+    				if (ren==)
+    				{
+    					x=200;
+    				}else
+    				{
+    					x=inicioX;
+    				}
+    			}
+    			y=inicioY + ren*50;
+    		}
+    	}
+
+    	function pintaPalabra()
+    	{
+    		var p=math.floor(math.random()*palabras_Array.length);
+    		palabra=palabras_Array[p]:
+    		var w=canvas.width;
+    		var len=palabra.length;
+    		var ren=0;
+    		var col=0;
+    		var y=230;
+    		var lon=50;
+    		var x=(w(lon+margen)*len)/2;
+    		for(var i=0; i<palabra.length; i++)
+    		{
+    			letra=palabra.subtr(i,1);
+    			MiLetra=new letra(x,y,lon,lon,letra);
+    			MiLetra.dibuja();
+    			letras_Array.push(MiLetra);
+    			x +=lon + margen;
+    		}
+
+
+    	function horca(errores)
+    	{
+    		var imagen= new image();
+    		imagen.direccion de la imagen
+    		imagen.onload=function()
+    		{
+    			ctx(imagen,390,0,230,230);
+    		}
+    	}
+
+    	function ajusta(xx,yy)
+    	{
+    		var PosCanvas=canvas.getBoundingClienteRect();
+    		var x = xx-posCanvas.left;
+    		var y = yy.PosCanvas.top;
+    		retutn{x:x, y:y}
+
+    	}
+
+    	function selecciona(e)
+    	{
+    		var pos=ajusta(e.clientX, e.clientY);
+    		var x =pos.x;
+    		var y =pos.y;
+    		var tecla;
+    		var bandera = false;
+    		for (var i=0; i< teclas_Array.length; i++)
+    		{
+    			tecla=teclas_Array[i];
+    			if (tecla.x >0)
+    			{
+    				if ((x > tecla.x) && (x < tecla.x + tecla.ancho) && (y < tecla.y + tecla.alto))
+    				{
+    					break;
+    				}
+    			}
+    		}
+
+    		if (i < teclas_Array.length)
+    		{
+    			for (var i=0; i < palabra.length; i++)
+    			{
+    				letra=palabra.subtr(i,1);
+    				if (letra == tecla.letra)
+    				{
+    					caja=letras_Array[i];
+    					caja.dibujaLetra();
+    					aciertos++;
+    					bandera =true;
+    				}
+
+    				if (bandera == false)
+    				{
+    					errores++;
+    					horca(errores);
+    					if (errores == 5) gameOver(errores);
+    				}
+    				ctx.clearRect(tecla.x-1, tecla.y 1, tecla.ancho + 2, tecla.alto +2);
+    				tecla.x -1;
+    				if (aciertos== palabra.length) gameOver (errores);
+    			}
+    		}
+    	function gameOver(errores)
+    	{
+    		ctx.crearRect(0,0, canvas.width,canvas.length);
+    		ctx.fillstyle="black");
+			ctx.font = "boald 50px courier";
+			if (errores <5)
+			{
+				ctx.fillText("gas ganado la palabra era:" 110,220);
+
+			}else
+			ctx.fillText("gas perdido la palabra era:" 110,280);
+    	}
+    	ctx.font="bound 80px courier");
+		ion =(canvas.width - (palabra.length*48))/2;
+		ctx.fillText(palabra,lon,380);
+		horca(errores);
+
+
+
+
+    	window.onload=function()
+    	{
+    		canvas=document.getElementById("pantalla")
+    		if (canvas && canvas.getCntext()
+    		{
+    			ctx=canvas.getCntext("2d")
+    		}
+    		if (ctx)
+    		{
+    			teclado();
+    			pintaPalabra();
+    			horca(errores);
+    			canvas.addEventLinstener("click",selecciona, false);
+    		} else
+    		{
+    			alert("error al cargar el contecto de canvas");
+    		}
+
+
+    	}
+    </script>
+
+
+<button>A</button>
+<button>B</button>
+<button>C</button>
+<button>D</button>
+<button>E</button>
+<button>F</button>
+<button>G</button>
+<button>H</button>
+<button>I</button>
+<button>J</button>
+<button>K</button>
+<button>L</button>
+<button>M</button>
+<button>N</button>
+<button>Ñ</button>
+<button>O</button>
+<button>P</button>
+<button>Q</button>
+<button>R</button>
+<button>S</button>
+<button>T</button>
+<button>U</button>
+<button>V</button>
+<button>W</button>
+<button>X</button>
+<button>Y</button>
+<button>Z</button>
+
+
+
+</body>
+</html>

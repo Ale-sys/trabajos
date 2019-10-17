@@ -1,0 +1,15 @@
+h1
+{
+	font-family: tahoma,verdana,arial,sans-serif;
+    font-size: 38px;
+    letter-spacing:0.05px;
+    margin: 0;
+    color:#fff;
+    -webkit-font-smoothing: antialiased;
+}
+.cuadrado
+{
+	width: 90px;
+	height: 20px;
+
+}
